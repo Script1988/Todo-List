@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <h1>TODO LIST
+  <a class="btn btn-primary" href={% url 'to_do:task_create' %}>Add a task</a>
+  </h1>
+  <form action="" method="get" class="form-inline">
+  {{ search_field|crispy }}
+{#  <input type="submit" value="Submit" class="btn btn-secondary">#}
+
+  {% if tasks %}
+    <ul class="sidebar-nav">
+
+    {% for task in tasks %}
+
+    <li class="font-weight-bold"> {{ task.content }}
+      {% if task.progres %}
+        <p class="text-success" >Done</p>
+        <a class="btn btn-secondary" href="{% url "to_do:task_status_change" pk=task.pk %}">Undo</a>
+        {% else %}
+        <p class="text-danger">Not done</p>
+        <a class="btn btn-success" href="{% url "to_do:task_status_change" pk=task.pk %}">Complete</a>
+      {% endif %}
+      </li>
+    <li>Created at: {{ task.datetime }}</li>
+    <li>Deadline: {{ task.deadline }}</li>
+    <li>Tags:
+    {% for tag in task.tags.all %}
+      {{ tag.name }}
+      {% endfor %}
+    <a class="btn btn-success" href={% url "to_do:task_update" pk=task.pk %}>Update the task</a>
+    <a class="btn btn-danger" href={% url "to_do:task_delete" pk=task.pk %}>Delete the task</a>
+    </li>
+
+    <hr>
+    {% endfor %}
+    </ul>
+
+  {% endif %}
+
+{% endblock %}
