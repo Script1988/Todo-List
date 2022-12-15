@@ -35,10 +35,10 @@ class TaskDeleteView(generic.DeleteView):
 
 def task_status_change(request, pk):
     task = Task.objects.get(pk=pk)
-    if task.progres is False:
-        task.progres = True
+    if task.is_done is False:
+        task.is_done = True
     else:
-        task.progres = False
+        task.is_done = False
     task.save()
     return HttpResponseRedirect(reverse_lazy("to_do:tasks"))
 

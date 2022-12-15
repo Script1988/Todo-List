@@ -20,7 +20,7 @@ class TaskCreateForm(TaskForm):
         model = Task
         fields = "__all__"
         widgets = {
-            "datetime": forms.DateTimeInput(
+            "created_at": forms.DateTimeInput(
                 format="%Y-%m-%d", attrs={
                     "class": "form-control",
                     "placeholder": "Select a date",

@@ -19,7 +19,7 @@
 
     <li class="font-weight-bold d-inline"> {{ task.content }}
 
-      {% if task.progres %}
+      {% if task.is_done %}
         <a class="btn btn-secondary d-inline" href="{% url "to_do:task_status_change" pk=task.pk %}">Undo</a>
         <p class="text-success">Done</p>
         {% else %}
@@ -27,7 +27,7 @@
         <p class="text-danger">Not done</p>
       {% endif %}
       </li>
-    <li>Created at: {{ task.datetime }}</li>
+    <li>Created at: {{ task.created_at }}</li>
     <li>Deadline: {{ task.deadline }}</li>
     <li>Tags:
     {% for tag in task.tags.all %}
